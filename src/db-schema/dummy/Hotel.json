@@ -1,0 +1,22 @@
+{
+    "data" : [
+        {
+            "_id" : "5d5793b607e1912cd4f94565",
+            "name": "Le-meridian",
+            "id": "123",
+            "roomIds": [1, 2, 3],
+            "bookedRoomIds": [1],
+            "availableRoomIds": [2, 3],
+            "price": 1250
+        },
+        {
+            "_id" : "5d5793b607e1912cd4f94566",
+            "name": "Le-meridian",
+            "id": "456",
+            "roomIds": [4, 5, 6],
+            "bookedRoomIds": [4],
+            "availableRoomIds": [5, 6],
+            "price": 1400
+        }
+    ]
+}

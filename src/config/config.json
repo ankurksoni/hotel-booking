@@ -1,0 +1,40 @@
+{
+	"isTest" : true,
+	"isFastifyDebugEnabled" : false,
+	"serverPort": 5000,
+	"serverHost": "0.0.0.0",
+	"logger": {
+		"filename": "hotel-booking.log",
+		"fatalfilename": "hotel-booking-fatal.log",
+		"dirname": "logs"
+	},
+	"log": {
+		"rotationLog": {
+			"period": "1d",
+			"count": 15,
+			"level": "error"
+		},
+		"rotationFatalLog": {
+			"period": "1d",
+			"count": 15,
+			"level": "fatal"
+		},
+		"consoleLog": {
+			"level": "info"
+		}
+	},
+	"dbconfig" : {
+		"host" : "localhost",
+		"port" : 27017,
+		"databaseName" : "booking",
+		"db": {
+			"raw": false
+		  },
+		"server": {
+		"poolSize": 100,
+		"socketOptions": {
+			"connectTimeoutMS" : 10000
+			}
+		}
+	}
+}

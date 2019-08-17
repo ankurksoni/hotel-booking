@@ -1,0 +1,24 @@
+{
+    "data" : [
+        {
+            "_id" : "5d57e928a60a996e54afada0",
+            "username": "ankursoni",
+            "email": "ankur@gmail.com",
+            "bonusPoints": 2000,
+            "queuedBookings": [],
+            "queuedBonusPointBookings" : [],
+            "historicalBookings" : [],
+            "historicalBonusBookings" : []
+        },
+        {
+            "_id" : "5d57e928a60a996e54afada1",
+            "username": "soni",
+            "email": "soni@gmail.com",
+            "bonusPoints": 1000,
+            "queuedBookings": [],
+            "queuedBonusPointBookings" : [],
+            "historicalBookings" : [],
+            "historicalBonusBookings" : []
+        }
+    ]
+}
