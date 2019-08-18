@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "serve": "npm install node index.js",
+    "serve": "npm install && node index.js",
     "test": "mocha --recursive --exit --timeout 5000"
   },
   "author": "Ankur Soni <ankursoni.leonardo@gmail.com>",
