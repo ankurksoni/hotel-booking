@@ -11,18 +11,9 @@ const DB_URI = `mongodb://${config.dbconfig.host}:${config.dbconfig.port}/${conf
 // Import Logger to log actions
 const LOG = require('./logger.js');
 
-// const for TEST_ENV
-const TEST_ENV = 'test';
-
 // Sample Data
 const initDB = require('./../utils/init-db.js');
-
-// require Mockgoose
-const Mockgoose = require('mockgoose').Mockgoose;
             
-// Instance for Mockgoose
-const mockgoose = new Mockgoose(mongoose);
-
 // Establish DB Connection
 const establishConnection = (resolve, reject) => {
     mongoose.connect(DB_URI, {

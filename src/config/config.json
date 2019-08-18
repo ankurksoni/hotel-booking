@@ -1,5 +1,4 @@
 {
-	"isTest" : true,
 	"isFastifyDebugEnabled" : false,
 	"serverPort": 5000,
 	"serverHost": "0.0.0.0",
@@ -26,15 +25,6 @@
 	"dbconfig" : {
 		"host" : "localhost",
 		"port" : 27017,
-		"databaseName" : "booking",
-		"db": {
-			"raw": false
-		  },
-		"server": {
-		"poolSize": 100,
-		"socketOptions": {
-			"connectTimeoutMS" : 10000
-			}
-		}
+		"databaseName" : "booking"
 	}
 }

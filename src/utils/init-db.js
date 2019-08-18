@@ -8,18 +8,18 @@ const LOG = require('../utils/logger.js');
 
 const initialise = () => {
     User.find({}).deleteMany({}, (err) => {
+        if(err) {
+            return;
+        }
         User.find({}, function (error, docs) {
             if (docs.length) {
                 LOG.info('User data is ready.');
             } else {
                 for (var i = 0; i < UserData.data.length; i++) {
-                    debugger;
                     let user = new User(UserData.data[i]);
                     user.save((err) => {
                         if (!err) {
                             LOG.trace('User created.');
-                        } else {
-                            LOG.error(err);
                         }
                     });
                 }
@@ -28,6 +28,9 @@ const initialise = () => {
     });
     
     Hotel.find({}).deleteMany({}, (err) => {
+        if(err) {
+            return;
+        }
         Hotel.find({}, function (error, docs) {
             if (docs.length) {
                 LOG.info('Hotel data is ready.');
@@ -37,8 +40,6 @@ const initialise = () => {
                     hotel.save((err) => {
                         if (!err) {
                             LOG.trace('hotel created.');
-                        } else {
-                            LOG.error(err);
                         }
                     });
                 }

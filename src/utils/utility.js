@@ -1,5 +1,6 @@
 const CONFIG = require('../config/config.json');
 const _ = require('lodash');
+const LOGGER = require('../utils/logger.js');
 
 /** @constant {Object} */
 const DATA_TYPE = {
@@ -18,19 +19,6 @@ const HTTP_STATUS_CODE = {
 
 }
 
-/** @constant {Object} */
-const dbconfig = {
-    db: {
-        raw: CONFIG.dbconfig.db.raw
-      },
-      server: {
-        poolSize: CONFIG.dbconfig.server.poolSize,
-        socketOptions: {
-            connectTimeoutMS : CONFIG.dbconfig.server.socketOptions.connectTimeoutMS
-          }
-      }
-};
-
 /**
  * Efficiently calculates the comma separated string
  * passed into the method. The input is expected in below format,
@@ -46,11 +34,32 @@ const concat = (...strings) => {
 };
 
 /**
+ * Checks if give configuration parameter exists with given data types. If no then exit node js service 
+ * pointing deficiency in perticular parameter.
+ * 
+ * @param {string} configParam 
+ * @param {string} dataType 
+ */
+const checkIfExists = (configParam, configParamString, dataType) => {
+    // check if configuration parameter exists in configuration file.
+    if (typeof configParam != 'boolean' && !configParam) {
+        LOGGER.fatal("Configuration parameter is invalid OR absent: " + configParamString);
+        process.exit(1);
+    }
+    // check if configuration parameter has valid data type.
+    if (typeof configParam != dataType) {
+        LOGGER.fatal("Data type for configuration parameter '" + configParamString + "' must be: " + dataType);
+        process.exit(1);
+    }
+}
+
+/**
  * validate the configuration parameter is valid with given conditions
  * 
  */
 const validateConfigfileParameters = () => {
-    checkIfExists(CONFIG.isFastifyDebugEnabled, "CONFIG.isFastifyDebugEnabled", DATA_TYPE.Boolean);
+    LOGGER.error('Validating Configuration file.');
+    checkIfExists(CONFIG.isFastifyDebugEnabled, "CONFIG.isFastifyDebugEnabled", DATA_TYPE.BOOLEAN);
     checkIfExists(CONFIG.serverHost, "CONFIG.serverHost", DATA_TYPE.STRING);
     
     checkIfExists(CONFIG.logger, "CONFIG.logger", DATA_TYPE.OBJECT);
@@ -75,13 +84,8 @@ const validateConfigfileParameters = () => {
     checkIfExists(CONFIG.dbconfig, "CONFIG.dbconfig", DATA_TYPE.OBJECT);
     checkIfExists(CONFIG.dbconfig.host, "CONFIG.dbconfig.host", DATA_TYPE.STRING);
     checkIfExists(CONFIG.dbconfig.port, "CONFIG.dbconfig.port", DATA_TYPE.NUMBER);
-    checkIfExists(CONFIG.dbconfig.hostName, "CONFIG.dbconfig.hostName", DATA_TYPE.STRING);
-    checkIfExists(CONFIG.dbconfig.db, "CONFIG.dbconfig.db", DATA_TYPE.OBJECT);
-    checkIfExists(CONFIG.dbconfig.db.raw, "CONFIG.dbconfig.db.raw", DATA_TYPE.BOOLEAN);
-    checkIfExists(CONFIG.dbconfig.server, "CONFIG.dbconfig.server", DATA_TYPE.OBJECT);
-    checkIfExists(CONFIG.dbconfig.server.poolSize, "CONFIG.dbconfig.server.poolSize", DATA_TYPE.NUMBER);
-    checkIfExists(CONFIG.dbconfig.server.socketOptions, "CONFIG.dbconfig.server.socketOptions", DATA_TYPE.OBJECT);
-    checkIfExists(CONFIG.dbconfig.server.socketOptions.connectTimeoutMS, "CONFIG.dbconfig.server.socketOptions.connectTimeoutMS", DATA_TYPE.NUMBER);
+    checkIfExists(CONFIG.dbconfig.databaseName, "CONFIG.dbconfig.databaseName", DATA_TYPE.STRING);
+    LOGGER.error('Configuration file successfully validated.');
 };
 
 /**
@@ -91,15 +95,8 @@ const validateConfigfileParameters = () => {
  * @param {number} port 
  * @param {string} dbName 
  */
-const getConnectionString = (host='localhost', port=27017, dbName='emgda') => {
+const getConnectionString = (host='localhost', port=27017, dbName='bookings') => {
     return `mongodb://${host}:${port}/${dbName}`
-}
-
-/**
- * Get DB Configuration Parameters
- */
-const getDbConfigParams = () => {
-    return dbconfig;
 }
 
 /**
@@ -116,7 +113,6 @@ module.exports = {
     HTTP_STATUS_CODE,
     validateConfigfileParameters,
     getConnectionString,
-    getDbConfigParams,
     concat,
     throwError
 };

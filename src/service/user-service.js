@@ -1,9 +1,6 @@
 // import lodash utility
 const _ = require('lodash');
 
-// import utility to utilise DRY and generic methods
-const UTILITY = require('../utils/utility.js');
-
 // import Log to log all actions performed.
 const LOG = require('../utils/logger.js');
 

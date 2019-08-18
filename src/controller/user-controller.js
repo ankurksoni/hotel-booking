@@ -1,6 +1,3 @@
-// External Boom Dependencies
-const boom = require('boom');
-
 // initialise book service
 const userService = require('../service/user-service.js');
 

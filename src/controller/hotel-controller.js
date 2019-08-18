@@ -1,6 +1,3 @@
-// External Boom Dependencies
-const boom = require('boom');
-
 // initialise book service
 const hotelService = require('../service/hotel-service.js');
 
@@ -48,6 +45,12 @@ const getHotel = async (req, reply) => {
     }
 };
 
+/**
+ * Get Available Hotel room.
+ * 
+ * @param {object} req 
+ * @param {object} reply 
+ */
 const getAvailableHotelRoom = async (req, reply) => {
     try {
         const hotel = hotelService.getAvailableHotelRoom(req.body);
